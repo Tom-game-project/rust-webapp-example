@@ -1,12 +1,14 @@
 use actix_cors::Cors;
 use actix_web::{web, App, HttpServer};
+use actix_files::Files;
 
 mod api;
 use api::proc::index;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()>{
-    let mut port = 8080;
+    let port = 8080;
+
     HttpServer::new(move || {
         let mut cors = Cors::default();
         cors = cors
@@ -22,15 +24,14 @@ async fn main() -> std::io::Result<()>{
         App::new()
             // .app_data(tow_truck_service.clone())
             .wrap(cors)
-            .service(
-                web::scope("/api")
-                    .service(
-                        web::resource("/main")
-                            .route(web::get().to(index)),
-                    )
+            .service(Files::new(
+                    "/static/",
+                    "../frontend/static/",
+                )
+                .show_files_listing()
             )
             .service(
-                web::resource("/servise")
+                web::resource("/")
                     .route(web::get().to(index)),
             )
     })
