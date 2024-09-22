@@ -47,8 +47,8 @@ impl Component for Model {
         html! {
             <div>
                 <h1 class="text-3xl font-bold underline">{"counter"}</h1>
-                <button onclick={self.link.callback(|_| Msg::AddOne)}>{ "+1" }</button>
-                <button onclick={self.link.callback(|_| Msg::SubOne)}>{ "-1" }</button>
+                <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl py-2 px-4" onclick={self.link.callback(|_| Msg::SubOne)}>{ "-1" }</button>
+                <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl py-2 px-4" onclick={self.link.callback(|_| Msg::AddOne)}>{ "+1" }</button>
                 <p>{ self.value }</p>
             </div>
         }
