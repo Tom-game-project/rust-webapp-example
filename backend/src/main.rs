@@ -26,7 +26,7 @@ async fn main() -> std::io::Result<()>{
             .wrap(cors)
             .service(Files::new(
                     "/static/",
-                    "../frontend/static/",
+                    "../frontend/dist/",
                 )
                 .show_files_listing()
             )

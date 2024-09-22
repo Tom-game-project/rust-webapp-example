@@ -3,7 +3,13 @@
 ## build
 
 ```bash
-wasm-pack build --target web --out-name wasm --out-dir ./static
+wasm-pack build --target web --out-name wasm --out-dir ./dist
+```
+
+tailwind
+```bash
+npx tailwindcss -i ./static/style.css -o ./dist/output.css 
+#--watch
 ```
 
 ## server
