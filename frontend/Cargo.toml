@@ -7,6 +7,6 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-yew = "0.17"
+yew = { version = "0.21.0", features = ["csr"] }
 wasm-bindgen = "0.2"
 gloo = "0.11.0"

@@ -1,28 +1,30 @@
+use yew::html::Scope;
 use yew::prelude::*;
-// debug tools
 use gloo::console;
 
-pub struct Model {
-    link: ComponentLink<Self>,
-    value: i64,
+pub struct MyComponent{
+    link:Scope<Self>,
+    value:i32
 }
 
-pub enum Msg {
+pub enum Msg{
     AddOne,
-    SubOne
+    SubOne,
 }
 
-impl Component for Model {
+impl Component for MyComponent {
     type Message = Msg;
     type Properties = ();
-    fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
+
+    
+    fn create(ctx: &Context<Self>) -> Self {
         Self {
-            link,
-            value: 0,
+            link: ctx.link().clone(),
+            value:0
         }
     }
 
-    fn update(&mut self, msg: Self::Message) -> ShouldRender {
+    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::AddOne => {
                 self.value += 1;
@@ -33,22 +35,19 @@ impl Component for Model {
                 console::log!("-1!");
             }
         }
-        true
+        true   
     }
 
-    fn change(&mut self, _props: Self::Properties) -> ShouldRender {
-        // Should only return "true" if new properties are different to
-        // previously received properties.
-        // This component has no properties so we will always return "false".
-        false
-    }
+    fn view(&self, _ctx: &Context<Self>) -> Html {
+         // Create an ephemeral callback
+        let incr = self.link.callback(move |_| Msg::AddOne);
+        let decr = self.link.callback(move |_| Msg::SubOne);
 
-    fn view(&self) -> Html {
         html! {
             <div>
                 <h1 class="text-3xl font-bold underline">{"counter"}</h1>
-                <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl hover:bg-red-500 py-2 px-4" onclick={self.link.callback(|_| Msg::SubOne)}>{ "-1" }</button>
-                <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl hover:bg-red-500 py-2 px-4" onclick={self.link.callback(|_| Msg::AddOne)}>{ "+1" }</button>
+                <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl hover:bg-red-500 py-2 px-4" onclick={decr}>{ "-1" }</button>
+                <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl hover:bg-red-500 py-2 px-4" onclick={incr}>{ "+1" }</button>
                 <p>{ self.value }</p>
             </div>
         }
