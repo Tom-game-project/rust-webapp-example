@@ -8,7 +8,7 @@ wasm-pack build --target web --out-name wasm --out-dir ./dist
 
 tailwind
 ```bash
-npx tailwindcss -i ./static/style.css -o ./dist/output.css 
+npx tailwindcss -i ./static/style.css -o ./dist/style.css 
 #--watch
 ```
 
