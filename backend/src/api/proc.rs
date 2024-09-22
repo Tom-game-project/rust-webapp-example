@@ -1,28 +1,15 @@
 use actix_web::{Error, HttpRequest, HttpResponse, Result};
-
+use std::fs::read_to_string;
 
 /// index
 pub async fn index(_:HttpRequest) -> Result<HttpResponse, Error>{
-    Ok(HttpResponse::Ok()
-        .content_type("text/html; charset=utf-8")
-        .body(
-        format!("{}",
-r#"
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>This is me</title>
-        <link href="./static/output.css" rel="stylesheet">
-        <script type="module">
-            import init from "./static/wasm.js"
-            init()
-        </script>
-    </head>
-    <body></body>
-</html>
-"#
-    )
-    ))
+    match read_to_string("../frontend/index.html"){
+        Ok(a) => {
+            Ok(HttpResponse::Ok()
+            .content_type("text/html; charset=utf-8")
+            .body(a))
+        },
+        Err(_) => return Ok(HttpResponse::InternalServerError().body("Failed to read HTML file")),
+    }
 }
 
