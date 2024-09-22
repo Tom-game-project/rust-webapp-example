@@ -10,7 +10,10 @@ module.exports = {
     "bg-red-500",
     "text-white",
     "shadow-lg",
+    // hover時の変化
     "hover:shadow-xl",
+    "hover:bg-red-500",
+    //
     "py-2",
     "px-4",
   ],
