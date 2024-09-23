@@ -2,6 +2,9 @@ use yew::html::Scope;
 use yew::prelude::*;
 use gloo::console;
 
+use crate::components::showcase::ShowcaseTable;
+//
+
 pub struct MyComponent{
     link:Scope<Self>,
     value:i32
@@ -48,6 +51,7 @@ impl Component for MyComponent {
                 <h1 class="text-3xl font-bold underline">{"counter"}</h1>
                 <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl hover:bg-red-500 py-2 px-4" onclick={decr}>{ "-1" }</button>
                 <button class="font-bold rounded bg-blue-500 text-white shadow-lg hover:shadow-xl hover:bg-red-500 py-2 px-4" onclick={incr}>{ "+1" }</button>
+                <ShowcaseTable/>
                 <p>{ self.value }</p>
             </div>
         }
