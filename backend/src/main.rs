@@ -7,7 +7,7 @@ use api::proc::index;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()>{
-    let port = 8080;
+    let port = 8000;
 
     HttpServer::new(move || {
         let mut cors = Cors::default();
